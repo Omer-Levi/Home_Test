@@ -1,0 +1,37 @@
+<div class="login">
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div class="container">
+            <h1 style="text-align:center">Login</h1>
+            <hr>
+            <label for="email"><b>Email</b></label>
+            <input type="text" placeholder="Enter Email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }">
+            <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+              <div title='email empty' *ngIf="f['email'].errors['required']">Email is required</div>
+              <div title='email valid' *ngIf="f['email'].errors['email']">Email must be a valid email address</div>
+            </div>
+
+            <label for="password"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f['password'].errors }">
+            <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+              <div title='password empty' *ngIf="f['password'].errors['required']">Password is required</div>
+              <div title='password short' *ngIf="f['password'].errors['minlength']">Password must be at least 6 characters long</div>
+              <div title='password upcase' *ngIf="f['password'].errors['uppercase']">Password must contain at least one uppercase letter</div>
+            </div>
+
+            <hr>
+            <button type="submit" class="registerbtn">Login</button>
+          </div>
+        </form>
+        <div title='invalid error' id='invalid error' *ngIf="loginError" class="error">
+          <small>{{ loginError }}</small>
+        </div>
+        <div *ngIf="loginSuccess" class="success">
+          <small>{{ loginSuccess }}</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
